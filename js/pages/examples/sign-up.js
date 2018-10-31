@@ -1,9 +1,6 @@
 $(function () {
     $('#sign_up').validate({
         rules: {
-            'terms': {
-                required: true
-            },
             'confirm': {
                 equalTo: '[name="password"]'
             }

@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <?php 
+ini_set("display_error", false);
 error_reporting(0);
 ?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Base de dados | Horta Helper</title>
+    <title>Gerenciar Hortas | Horta Helper</title>
     <!-- Favicon-->
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 
@@ -35,9 +36,9 @@ error_reporting(0);
 	
 <?php
 // A sessão precisa ser iniciada em cada página diferente
-if (!isset($_SESSION)) session_start();
+if(!isset($_SESSION)) session_start();
 // Verifica se não há a variável da sessão que identifica o usuário
-if (!isset($_SESSION['UsuarioID'])) {
+if(!isset($_SESSION['UsuarioID'])) {
   // Destrói a sessão por segurança
   session_destroy();
   // Redireciona o visitante de volta pro login
@@ -66,82 +67,39 @@ if (!isset($_SESSION['UsuarioID'])) {
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h2>BASE DE DADOS</h2>
+                <h2>GERENCIAR HORTAS</h2>
             </div>
-<?php include('DB.SEARCH.HORTADB.php');?>
-            <!-- Widgets -->
-            <div class="row clearfix">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-green hover-expand-effect">
-                        <div class="icon">
-                            <i class="material-icons">spa</i>
-                        </div>
-                        <div class="content">
-                            <div class="text">PLANTAS INSERIDAS</div>
-                            <div class="number count-to" data-from="0" data-to="<?php echo $total; ?>" data-speed="15" data-fresh-interval="20"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-light-green hover-expand-effect">
-                        <div class="icon">
-                            <i class="material-icons">spa</i>
-                        </div>
-                        <div class="content">
-                            <div class="text">HORTAS CADASTRADAS</div>
-                            <div class="number count-to" data-from="0" data-to="<?php echo $totalh; ?>" data-speed="1000" data-fresh-interval="20"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-green hover-expand-effect">
-                        <div class="icon">
-                            <i class="material-icons">person</i>
-                        </div>
-                        <div class="content">
-                            <div class="text">USUÁRIOS CADASTRADOS</div>
-                            <div class="number count-to" data-from="0" data-to="<?php echo $totalu; ?>" data-speed="1000" data-fresh-interval="20"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-cyan hover-expand-effect">
-                        <div class="icon">
-                            <i class="material-icons">assignment_ind</i>
-                        </div>
-                        <div class="content">
-                            <div class="text">ADMINISTRADORES</div>
-                            <div class="number count-to" data-from="0" data-to="1" data-speed="1000" data-fresh-interval="20"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Widgets -->
             <!-- Multiple Items To Be Open -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
-                        <div class="header">
-                            <h2>
-                                BASE DE DADOS SOBRE PLANTAS
-                                <small>Conheça os diversos e diferentes tipos de plantas</small>
-                            </h2>
+					<div class="header">
+                            <h2>GERENCIAR HORTAS CADASTRADAS</h2>
+                            <ul class="header-dropdown">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="ahorta.php" class=" waves-effect waves-block">Cadastrar Horta</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </div>
                         <div class="body">
                             <div class="row clearfix">
                                 <div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12">
-                                  <div class="body table-responsive">
+								<div class="body table-responsive">
                                     <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>NOME</th>
-                                        <th>TIPO</th>
-                                        <th>IMAGEM</th>
-										<th>+ INFO</th>
+                                        <th>PLANTA</th>
+                                        <th>ÚLTIMA REGA</th>
+                                        <th>+ INFO</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php include('buscabasededados.php');?>
+                                    <?php include('DB.SEARCH.GHORTAS.php');?>
                                 </tbody>
                             </table>
                         </div>

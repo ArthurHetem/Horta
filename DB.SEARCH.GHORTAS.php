@@ -10,13 +10,13 @@ $con = mysql_pconnect($host, $user, $pass) or trigger_error(mysql_error(),E_USER
 // seleciona a base de dados em que vamos trabalhar
 mysql_select_db($db, $con);
 // cria a instrução SQL que vai selecionar os dados
-$query = sprintf("SELECT * FROM plantas");
+$hortas = sprintf("SELECT * FROM hortas where iddono = '{$_SESSION['UsuarioID']}' ");
 // executa a query
-$dados = mysql_query($query, $con) or die(mysql_error());
+$dadoshortas = mysql_query($hortas, $con) or die(mysql_error());
 // transforma os dados em um array
-$linha = mysql_fetch_assoc($dados);
+$linha = mysql_fetch_assoc($dadoshortas);
 // calcula quantos dados retornaram
-$total = mysql_num_rows($dados);
+$total = mysql_num_rows($dadoshortas);
 ?>
 <?php
     // se o número de resultados for maior que zero, mostra os dados
@@ -25,10 +25,12 @@ $total = mysql_num_rows($dados);
         do {
 ?>
 										<tr>
-                                        <td><?=$linha['nome']?></td>
-                                        <td><?=$linha['tipo']?></td>
-                                        <td><img class="media-object" src="images/plantas/<?=$linha['nome']?>/1.jpg" width="111" height="111"></td>
-										<td><a href="planta.php?id=<?php echo $linha['id']?>" class="btn bg-green waves-effect">VER &raquo;</a></td>
+                                        <td><?php $buscaplanta = sprintf("SELECT * FROM plantas where id = '{$linha['idplanta']}'");
+										          $dadosplantas = mysql_query($buscaplanta, $con) or die(mysql_error());
+												  $linhap = mysql_fetch_assoc($dadosplantas);
+												   echo $linhap['nome']?></td>
+                                        <td><?php echo date('d/m/Y H:i:s', strtotime($linha['regagem']));?></td>
+                                        <td><a href="horta.php?id=<?php echo $linha['id']?>" class="btn bg-green waves-effect">VER &raquo;</a></td>
                                     </tr>
 										
 <?php

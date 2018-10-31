@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html>
 <?php 
+ini_set("display_error", false);
 error_reporting(0);
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+$servidor = 'localhost';
+$usuario = 'root';
+$senha = 'vertrigo';
+$banco = 'horta';
+$mysqli = new mysqli($servidor, $usuario, $senha, $banco);
+ 
+// Executa uma consulta que pega cinco notícias
+$sql = "SELECT * FROM plantas where id = '{$id}'";
+$query = $mysqli->query($sql);
+$dados = $query->fetch_array();
+
 ?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Base de dados | Horta Helper</title>
+    <title><?php echo $dados['nome']; ?> | Horta Helper</title>
     <!-- Favicon-->
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 
@@ -35,9 +48,9 @@ error_reporting(0);
 	
 <?php
 // A sessão precisa ser iniciada em cada página diferente
-if (!isset($_SESSION)) session_start();
+if(!isset($_SESSION)) session_start();
 // Verifica se não há a variável da sessão que identifica o usuário
-if (!isset($_SESSION['UsuarioID'])) {
+if(!isset($_SESSION['UsuarioID'])) {
   // Destrói a sessão por segurança
   session_destroy();
   // Redireciona o visitante de volta pro login
@@ -69,82 +82,37 @@ if (!isset($_SESSION['UsuarioID'])) {
                 <h2>BASE DE DADOS</h2>
             </div>
 <?php include('DB.SEARCH.HORTADB.php');?>
-            <!-- Widgets -->
-            <div class="row clearfix">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-green hover-expand-effect">
-                        <div class="icon">
-                            <i class="material-icons">spa</i>
-                        </div>
-                        <div class="content">
-                            <div class="text">PLANTAS INSERIDAS</div>
-                            <div class="number count-to" data-from="0" data-to="<?php echo $total; ?>" data-speed="15" data-fresh-interval="20"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-light-green hover-expand-effect">
-                        <div class="icon">
-                            <i class="material-icons">spa</i>
-                        </div>
-                        <div class="content">
-                            <div class="text">HORTAS CADASTRADAS</div>
-                            <div class="number count-to" data-from="0" data-to="<?php echo $totalh; ?>" data-speed="1000" data-fresh-interval="20"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-green hover-expand-effect">
-                        <div class="icon">
-                            <i class="material-icons">person</i>
-                        </div>
-                        <div class="content">
-                            <div class="text">USUÁRIOS CADASTRADOS</div>
-                            <div class="number count-to" data-from="0" data-to="<?php echo $totalu; ?>" data-speed="1000" data-fresh-interval="20"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-cyan hover-expand-effect">
-                        <div class="icon">
-                            <i class="material-icons">assignment_ind</i>
-                        </div>
-                        <div class="content">
-                            <div class="text">ADMINISTRADORES</div>
-                            <div class="number count-to" data-from="0" data-to="1" data-speed="1000" data-fresh-interval="20"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Widgets -->
             <!-- Multiple Items To Be Open -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
                             <h2>
-                                BASE DE DADOS SOBRE PLANTAS
-                                <small>Conheça os diversos e diferentes tipos de plantas</small>
+                                <?php echo $dados['nome']; ?> - Regar a cada <b><?php echo $dados['regagem'];?></b> dias
                             </h2>
                         </div>
                         <div class="body">
                             <div class="row clearfix">
                                 <div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12">
-                                  <div class="body table-responsive">
-                                    <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>NOME</th>
-                                        <th>TIPO</th>
-                                        <th>IMAGEM</th>
-										<th>+ INFO</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php include('buscabasededados.php');?>
-                                </tbody>
-                            </table>
-                        </div>
+								<div class="media">
+                                    <div class="media-left">
+                                            <img class="media-object" src="images/plantas/<?php echo $dados['nome']; ?>/1.jpg" width="222" height="222">
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><?php echo $dados['nome']; ?> - <?php echo $dados['nomec']; ?></h4>
+                                        <h5>Descrição:</h5>
+										<p>
+                                            <?php echo $dados['descricao']; ?>
+                                        </p>
+										<br>
+										<br>
+										<hr>
+										<h5>Instruções de cultivo:</h5>
+                                        <p>
+                                            <?php echo $dados['instrucao']; ?>
+                                        </p>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                         </div>

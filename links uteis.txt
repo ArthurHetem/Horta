@@ -1,0 +1,6 @@
+http://www.guj.com.br/t/usando-id-que-esta-na-url-para-pegar-dados-no-banco-de-dados/333670/2
+https://www.jardineiro.net/plantas/abacaxi-ornamental-ananas-bracteatus.html
+https://github.com/romariosantos/video-aulas
+https://codepen.io/bsngr/pen/Ifvbi
+https://material.io/tools/color/#!/?view.left=0&view.right=0&primary.color=00C853
+https://stackoverflow.com/questions/8752398/show-different-page-if-first-time-visit/8752418

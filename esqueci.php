@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Login | Horta Helper</title>
+    <title>Recuperar a Senha | Horta Helper</title>
     <!-- Favicon-->
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 
@@ -25,49 +25,25 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 
-<body class="login-page">
-    <div class="login-box">
+<body class="signup-page ls-closed" cz-shortcut-listen="true">
+    <div class="signup-box">
         <div class="logo">
             <a href="javascript:void(0);">Horta<b>Helper</b></a>
             <small>O Ajudante virtual da sua Horta.</small>
         </div>
         <div class="card">
             <div class="body">
-                <form id="sign_in" action="valida.php" method="POST">
-                    <div class="msg">Faça Login abaixo.</div>
+                <form id="sign_up" method="POST" novalidate="novalidate">
+                    <div class="msg">Recuperação de Senha</div>
                     <div class="input-group">
                         <span class="input-group-addon">
-                            <i class="material-icons">person</i>
+                            <i class="material-icons">email</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="usuario" placeholder="Usuário" required autofocus>
+                            <input type="email" class="form-control" name="email" placeholder="Endereço de Email" required="" aria-required="true">
                         </div>
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">lock</i>
-                        </span>
-                        <div class="form-line">
-                            <input type="password" class="form-control" name="senha" placeholder="Senha" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-8 p-t-5">
-                            <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-green">
-                            <label for="rememberme">Lembrar</label>
-                        </div>
-                        <div class="col-xs-4">
-                            <button class="btn btn-block bg-green waves-effect" type="submit">ENTRAR</button>
-                        </div>
-                    </div>
-                    <div class="row m-t-15 m-b--20">
-                        <div class="col-xs-6">
-                            <a href="cadastro.php">Cadastrar-se</a>
-                        </div>
-                        <div class="col-xs-6 align-right disabled">
-                            <a class="btn disabled" href="esqueci.php">Esqueceu sua Senha?</a>
-                        </div>
-                    </div>
+                    <button class="btn btn-block btn-lg bg-green waves-effect" type="submit">ENVIAR</button>
                 </form>
             </div>
         </div>
@@ -87,7 +63,8 @@
 
     <!-- Custom Js -->
     <script src="js/admin.js"></script>
-    <script src="js/pages/examples/sign-in.js"></script>
+
+
 </body>
 
 </html>
